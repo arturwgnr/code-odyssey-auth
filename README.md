@@ -1,69 +1,71 @@
-# React + TypeScript + Vite
+🚀 Code Odyssey – Auth & Theme App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A mock application built with React + TypeScript, focused on practicing authentication, Context API, and routing.
+Implements a complete flow: Register → Login → Protected Dashboard, plus light/dark theme toggle.
 
-Currently, two official plugins are available:
+✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔐 User registration & login (data persisted in localStorage)
 
-## Expanding the ESLint configuration
+👤 Global authentication state with Context API
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+🌓 Light/Dark theme toggle (applied directly to body)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+🌍 Routing with react-router-dom (Home, Login, Register, Dashboard)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+✅ Dashboard access restricted to logged-in users
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+🛠 Tech Stack
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+React + TypeScript
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+React Router DOM for navigation
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Context API for Auth & Theme management
+
+LocalStorage for session persistence
+
+Modern CSS (glassmorphism, responsive)
+
+📂 Project Structure
+src/
+ ┣ components/
+ ┃ ┣ Hero.tsx
+ ┃ ┣ Navbar.tsx
+ ┃ ┗ PrivateRoute.tsx
+ ┣ context/
+ ┃ ┣ AuthContext.tsx
+ ┃ ┗ ThemeContext.tsx
+ ┣ pages/
+ ┃ ┣ LoginPage.tsx
+ ┃ ┣ RegisterPage.tsx
+ ┃ ┗ Dashboard.tsx
+ ┣ App.tsx
+ ┗ main.tsx
+
+🚦 Routes
+
+/ → Home (Hero + Navbar)
+
+/login → Login page
+
+/register → Registration page
+
+/dashboard → Protected route (requires login)
+
+▶️ Getting Started
+# install dependencies
+npm install
+
+# run in development mode
+npm run dev
+
+🔮 Next Steps
+
+ Role-based access (admin vs user)
+
+ Improve UI feedback (toasts, error messages)
+
+ Build a real dashboard with tasks/finances
+
+ Persist theme selection in localStorage
