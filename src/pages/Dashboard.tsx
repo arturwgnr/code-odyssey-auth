@@ -5,8 +5,8 @@ export default function Dashboard() {
     <div className="dashboard-container">
       <Navbar/>
       <div className="dashboard-box">
-        <h1>Welcome to Dashboard</h1>
-        <p>This page also follows the theme filter 🎨</p>
+        <h1>Welcome to Dashboard, Emmanuelly</h1>
+        <p>Mas agora e serio, larga a mao de ser curiosa. Ainda nao fiz essa parte... Nao sufoque o Artista! 🎨</p>
       </div>
     </div>
   )
