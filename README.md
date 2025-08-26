@@ -69,3 +69,5 @@ npm run dev
  Build a real dashboard with tasks/finances
 
  Persist theme selection in localStorage
+
+Next features coming in the future!
