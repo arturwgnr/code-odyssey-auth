@@ -365,3 +365,249 @@ body.dark-theme {
   color: var(--text-secondary);
   transition: color 0.4s ease;
 }
+
+/* Dashboard container */
+.dashboard-container {
+  min-height: 100vh;
+  padding-top: 6rem; /* space for navbar */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Content wrapper */
+.dashboard-content {
+  width: 100%;
+  max-width: 1200px;
+  padding: 2rem;
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Welcome text */
+.dashboard-content h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+/* Grid of cards */
+.dashboard-grid {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Individual card */
+.dashboard-card-1,
+.dashboard-card-2,
+.dashboard-card-3 {
+  background: var(--bg-box);
+  color: var(--text-box);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  transition: background 0.4s ease, color 0.4s ease, transform 0.2s ease;
+  text-align: left;
+}
+
+.dashboard-card-1:hover,
+.dashboard-card-2:hover,
+.dashboard-card-3:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+  background-color: #374968;
+}
+
+/* Card title */
+.dashboard-card h2 {
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+/* Card text */
+.dashboard-card p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard-carousel {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-card {
+  cursor: pointer;
+  background: var(--bg-box);
+  color: var(--text-box);
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 100%; /* ocupa todo o espaço disponível */
+  max-width: 1000px; /* mas limita em telas muito grandes */
+  text-align: center;
+  transition: background 0.6s ease, color 0.4s ease;
+}
+
+.carousel-card:hover {
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+  background-color: #374968;
+}
+
+.carousel-card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+}
+
+.carousel-card p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+/*inenr css*/
+
+/* Container principal */
+.streak-container {
+  min-height: 100vh;
+  padding-top: 6rem; /* espaço pro navbar */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Conteúdo central */
+.streak-content {
+  width: 100%;
+  max-width: 800px;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Título e subtítulo */
+.streak-content h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.streak-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+/* Streak atual (número grande) */
+.streak-current {
+  background: var(--bg-box);
+  color: var(--text-box);
+  padding: 1.5rem;
+  border-radius: 12px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Mini calendário */
+.streak-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.day {
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+/* Estados dos dias */
+.day.done {
+  background: #4caf50;
+  color: #fff;
+}
+
+.day.missed {
+  background: #e57373;
+  color: #fff;
+}
+
+.day.today {
+  background: #f5b453;
+  color: #141e30;
+}
+
+/* Card motivacional */
+.streak-quote {
+  background: var(--bg-box);
+  padding: 1.2rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Botão ação */
+.streak-btn {
+  padding: 0.9rem 2rem;
+  border: none;
+  border-radius: 10px;
+  background: #2a5298;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.streak-btn:hover {
+  background: #1e3c72;
+  transform: translateY(-2px);
+}
+
+/* Motivational card */
+.streak-quote {
+  margin-top: 2rem;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  background: var(--bg-box);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  min-height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.streak-quote p {
+  transition: opacity 0.8s ease;
+  opacity: 1;
+}
+
+.streak-quote p.fade {
+  opacity: 0;
+}
