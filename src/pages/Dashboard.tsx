@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+import TopBarDash from "../components/TopBarDash";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 export default function Dashboard() {
   const auth = useContext(AuthContext);
   const username = auth?.user?.username ?? "Guest";
-  const formatted = username.charAt(0).toUpperCase() + username.slice(1);
 
   const nav = useNavigate();
 
@@ -16,10 +15,10 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-container">
-      <Navbar />
+      <TopBarDash />
 
       <div className="dashboard-content">
-        <h1>Welcome back, {formatted}!</h1>
+        <h1>Welcome back, @{username}!</h1>
 
         {/* Top grid with small cards */}
         <div className="dashboard-grid">
@@ -58,7 +57,7 @@ export default function Dashboard() {
         <div className="dashboard-carousel">
           <div className="carousel-card">
             <h2>💡 Tip of the Day</h2>
-            <p>Remember: consistency beats intensity. Keep coding daily.</p>
+            <p>Remember: Consistency beats intensity. Keep coding daily.</p>
           </div>
         </div>
       </div>

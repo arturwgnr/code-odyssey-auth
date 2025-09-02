@@ -7,6 +7,8 @@ import Hero from "./components/Hero";
 import Notes from "./pages/inner-pages/Notes";
 import Progress from "./pages/inner-pages/Progress";
 import Streak from "./pages/inner-pages/Streak";
+import SkOverview from "./pages/inner-pages/progress/SkOverview";
+import StAnalytics from "./pages/inner-pages/progress/StAnalytics";
 
 function App() {
   return (
@@ -21,6 +23,10 @@ function App() {
         <Route path="/dashboard/notes" element={<Notes />} />
         <Route path="/dashboard/progress" element={<Progress />} />
         <Route path="/dashboard/streak" element={<Streak />} />
+
+        <Route path="/progress/skills-overview" element={<SkOverview/>} />
+
+        <Route path="/progress/study-analytics" element={<StAnalytics/>} />
       </Routes>
     </Router>
 </AuthProvider>

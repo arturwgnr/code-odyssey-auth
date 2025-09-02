@@ -108,7 +108,7 @@ body {
 
 .login-box button:hover,
 .register-box button:hover {
-  background: #1e3c72;
+  background: #1e6872;
   transform: translateY(-2px);
 }
 
@@ -142,7 +142,6 @@ body {
 .login-box a:hover,
 .register-box a:hover,
 .navbar-actions .nav-link:hover {
-  background: rgba(255, 255, 255, 0.1);
   text-decoration: underline;
 }
 /* Navbar */
@@ -289,32 +288,118 @@ body {
   }
 }
 
-/* Tema Light */
+/* ☀️ Tema Light */
 body.light-theme {
-  --bg1: #f9f9f9;
-  --bg2: #eaeaea;
-  --bg: #f9f9f9;
-  --bg-box: #fff;
-  --bg-input: #fff;
-  --text: #141e30;
-  --text-box: #141e30;
-  --navbar-bg: #fff;
-  --text-secondary: #304469;
-  --link-color: #141e30;
+  --bg1: #f1b40c34; /* degrade suave */
+  --bg2: #2dff8410;
+  --bg: #e1e9e5; /* fundo base */
+  --bg-box: #ffffff;
+  --bg-input: #fdfdfd;
+
+  --text: #2e5546; /* principal */
+  --text-box: #3a7562; /* destaque */
+  --text-secondary: #5a6f65; /* leve contraste */
+
+  --navbar-bg: #eff0d9;
+  --link-color: #3a7562;
+
+  /* Botões */
+  --btn-primary: #3a7562;
+  --btn-primary-hover: #315d50;
+  --btn-secondary: transparent;
+  --btn-secondary-border: #3a7562;
+  --btn-secondary-hover-bg: #3a7562;
+  --btn-secondary-hover-text: #ffffff;
+
+  /* Acentos */
+  --accent: #f5b453; /* pode usar em hovers ou highlights */
 }
 
-/* Tema Dark */
+/* 🌙 Tema Dark */
 body.dark-theme {
-  --bg1: #141e30;
-  --bg2: #243b55;
-  --bg: #141e30;
-  --bg-box: #2c3c57;
+  --bg1: #0f172a;
+  --bg2: #1e293b;
+  --bg: #0f172a;
+  --bg-box: #1e293b;
   --bg-input: #2a354a;
-  --text: #fff;
-  --text-box: #fff;
-  --navbar-bg: #141e30;
-  --text-secondary: #ddd;
-  --link-color: #fff;
+
+  --text: #f8fafc;
+  --text-box: #f8fafc;
+  --text-secondary: #94a3b8;
+
+  --navbar-bg: #0f172acc;
+  --link-color: #c5d0d4;
+
+  /* Botões */
+  --btn-primary: #3c609b;
+  --btn-primary-hover: #2563eb;
+  --btn-secondary: transparent;
+  --btn-secondary-border: #38bdf8;
+  --btn-secondary-hover-bg: #38bdf8;
+  --btn-secondary-hover-text: #0f172a;
+
+  /* Acentos */
+  --accent: #377a6c;
+}
+
+/* Fundo texturizado light */
+body.light-theme {
+  background-image: 
+    /* manchas verdes suaves */ radial-gradient(
+      circle at 20% 20%,
+      rgba(124, 231, 138, 0.116) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(100, 172, 149, 0.05) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 60% 40%,
+      rgba(96, 179, 76, 0.04) 0%,
+      transparent 45%
+    ),
+    /* textura leve em diagonal */
+      repeating-linear-gradient(
+        45deg,
+        rgba(58, 117, 98, 0.015),
+        rgba(58, 117, 98, 0.015) 1px,
+        transparent 1px,
+        transparent 20px
+      ),
+    linear-gradient(135deg, var(--bg1), var(--bg2));
+}
+
+/* Fundo dark mantém degrade */
+body.dark-theme {
+  background-image: linear-gradient(135deg, var(--bg1), var(--bg2));
+}
+
+/* Botões globais */
+button,
+.login-box button,
+.register-box button,
+.btn {
+  background: var(--btn-primary);
+  color: #fff;
+  border: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease, color 0.3s ease;
+}
+
+/* Botões secundários */
+.btn.secondary {
+  background: var(--btn-secondary);
+  border: 2px solid var(--btn-secondary-border);
+  color: var(--btn-secondary-border);
+}
+.btn.secondary:hover {
+  background: var(--btn-secondary-hover-bg);
+  color: var(--btn-secondary-hover-text);
 }
 
 /* Animação */
@@ -414,12 +499,22 @@ body.dark-theme {
   text-align: left;
 }
 
+/* Hover (usa variável de tema) */
 .dashboard-card-1:hover,
 .dashboard-card-2:hover,
 .dashboard-card-3:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
-  background-color: #374968;
+  background-color: var(--card-hover);
+}
+
+/* Hover específico por tema */
+body.dark-theme {
+  --card-hover: #374968; /* azul escuro elegante */
+}
+
+body.light-theme {
+  --card-hover: #d5ffb9; /* verde-musgo clarinho suave */
 }
 
 /* Card title */
@@ -463,17 +558,25 @@ body.dark-theme {
   padding: 2.5rem;
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  width: 100%; /* ocupa todo o espaço disponível */
-  max-width: 1000px; /* mas limita em telas muito grandes */
+  width: 100%;
+  max-width: 1000px;
   text-align: center;
-  transition: background 0.6s ease, color 0.4s ease;
+  transition: background 0.6s ease, color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .carousel-card:hover {
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
-  background-color: #374968;
+  background-color: var(--carousel-hover);
 }
 
+/* Hover específico por tema */
+body.dark-theme {
+  --carousel-hover: #374968; /* azul escuro no dark */
+}
+
+body.light-theme {
+  --carousel-hover: #d1ffb6; /* verde-claro no light */
+}
 .carousel-card h2 {
   margin-bottom: 1rem;
   font-size: 1.6rem;
@@ -581,7 +684,7 @@ body.dark-theme {
   transition: background 0.3s, transform 0.2s;
 }
 
-.streak-btn:hover {
+.streak-btn dark:hover {
   background: #1e3c72;
   transform: translateY(-2px);
 }
@@ -610,4 +713,449 @@ body.dark-theme {
 
 .streak-quote p.fade {
   opacity: 0;
+}
+
+/*top nav bar*/
+/* TopBarDash (usa mesma base da navbar principal) */
+.navbar {
+  width: 100%;
+  padding: 0.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--navbar-bg);
+  color: var(--text);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Logo/Home */
+.navbar-logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.navbar-logo:hover {
+  transform: scale(1.1);
+}
+
+/* Ações (direita) */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Username */
+.nav-username {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Config button */
+.config-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+.config-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Logout */
+.logout-btn {
+  background: #e63946;
+  border: none;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
+}
+.logout-btn:hover {
+  background: #d62828;
+  transform: translateY(-2px);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.4s ease;
+}
+.theme-toggle:hover {
+  transform: rotate(25deg) scale(1.1);
+}
+
+/*progress page*/
+/* Container principal */
+.progress-container {
+  min-height: 100vh;
+  padding-top: 6rem; /* espaço pro TopBarDash */
+  padding-inline: 2rem;
+  color: var(--text);
+}
+
+/* Subtítulo */
+.progress-container .subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+/* Seção de skills */
+.progress-skills {
+  margin-bottom: 3rem;
+}
+
+.skill {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 12px;
+  background: var(--bg-input);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--btn-primary);
+  transition: width 0.4s ease;
+}
+
+.skill span.percent {
+  min-width: 40px;
+  text-align: right;
+  font-weight: 600;
+}
+
+/* Milestones */
+.progress-milestones ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.progress-milestones li {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  color: var(--text-box);
+}
+
+/* Skills container */
+.progress-skills {
+  margin-bottom: 3rem;
+}
+
+.skill {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  background: var(--bg-box);
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background 0.4s ease, transform 0.2s ease;
+}
+
+.skill:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Nome da skill */
+.skill span:first-child {
+  font-weight: 600;
+  min-width: 100px;
+}
+
+/* Barra de progresso */
+.progress-bar {
+  flex: 1;
+  height: 14px;
+  background: var(--bg-input);
+  border-radius: 7px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--btn-primary);
+  transition: width 0.4s ease, background 0.3s ease;
+}
+
+.skill .percent {
+  min-width: 50px;
+  text-align: right;
+  font-weight: 600;
+}
+
+/* Botões dentro da skill */
+.skill button {
+  background: var(--btn-secondary);
+  border: 2px solid var(--btn-secondary-border);
+  color: var(--btn-secondary-border);
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.skill button:hover {
+  background: var(--btn-secondary-hover-bg);
+  color: var(--btn-secondary-hover-text);
+  transform: translateY(-2px);
+}
+
+/* Save button destaque */
+.skill button.save-btn {
+  background: var(--btn-primary);
+  border: none;
+  color: #fff;
+}
+.skill button.save-btn:hover {
+  background: var(--btn-primary-hover);
+}
+
+/* Input de edição */
+.skill input[type="number"] {
+  width: 60px;
+  padding: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: var(--bg-input);
+  color: var(--text-box);
+  text-align: center;
+}
+
+/* Formulário de adicionar skill */
+.skill-form {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.skill-form input {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--bg-input);
+  color: var(--text-box);
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-form input:focus {
+  border-color: var(--btn-primary);
+  box-shadow: 0 0 0 3px rgba(58, 117, 98, 0.2); /* verde no light */
+  outline: none;
+}
+
+.skill-form button {
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  background: var(--btn-primary);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.skill-form button:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-2px);
+}
+
+.progress-chart {
+  min-height: 100vh;
+  padding-top: 6rem; /* espaço pro TopBarDash */
+  padding-inline: 2rem;
+  color: var(--text);
+  text-align: center;
+}
+
+.progress-chart h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Container do gráfico */
+.progress-chart {
+  min-height: 100vh;
+  padding-top: 6rem; /* espaço pro TopBarDash */
+  padding-inline: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--text);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Título */
+.progress-chart h2 {
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+}
+
+/* Card do gráfico */
+.progress-chart .recharts-wrapper {
+  background: var(--bg-box);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .progress-chart h2 {
+    font-size: 1.4rem;
+  }
+}
+
+.skills-button {
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+.button-options {
+  display: flex;
+}
+
+/*StAnalytics*/
+
+.st-analytics-container {
+  min-height: 100vh;
+  padding-top: 6rem; /* espaço da topbar */
+  padding-inline: 2rem;
+  color: var(--text);
+}
+
+/* Container principal */
+.st-analytics-container {
+  min-height: 100vh;
+  padding-top: 6rem; /* espaço pro TopBarDash */
+  padding-inline: 2rem;
+  color: var(--text);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Subtítulo */
+.st-analytics-container .subtitle {
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Seções */
+.analytics-section,
+.analytics-metrics,
+.analytics-distribution,
+.analytics-log {
+  background: var(--bg-box);
+  padding: 1.5rem;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  margin-bottom: 2rem;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* Títulos de seção */
+.analytics-section h2,
+.analytics-metrics h2,
+.analytics-distribution h2,
+.analytics-log h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+/* Placeholder de gráficos */
+.analytics-chart-placeholder {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed var(--text-secondary);
+  border-radius: 12px;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+/* Métricas resumo */
+.analytics-metrics ul {
+  list-style: none;
+  padding: 0;
+}
+.analytics-metrics li {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* Histórico */
+.analytics-log ul {
+  list-style: none;
+  padding: 0;
+}
+.analytics-log li {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+.analytics-log li:last-child {
+  border-bottom: none;
+}
+
+/* Botão voltar */
+.back-btn {
+  padding: 0.8rem 1.6rem;
+  border-radius: 10px;
+  border: none;
+  background: var(--btn-primary);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.back-btn:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-2px);
 }
