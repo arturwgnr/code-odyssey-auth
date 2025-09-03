@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 
 interface StudyLog {
+  id: number;
   date: string;    // YYYY-MM-DD
   topic: string;
   duration: number; // minutos
@@ -43,7 +44,7 @@ export default function Streak() {
       }, 600);
     }, 10000);
     return () => clearInterval(interval);
-  }, []);
+  });
 
   // salvar no localStorage
   useEffect(() => {
@@ -57,6 +58,7 @@ export default function Streak() {
 
     const today = new Date().toISOString().split("T")[0]; // yyyy-mm-dd
     const newLog: StudyLog = {
+      id: Date.now(),
       date: today,
       topic,
       duration: Number(duration),
@@ -65,6 +67,18 @@ export default function Streak() {
     setLogs([...logs, newLog]);
     setTopic("");
     setDuration("");
+  }
+
+  function handleDelete(id: number) {
+    const saved = logs.filter((i) => i.id !== id)
+
+    setLogs(saved)
+  }
+
+  function formatDuration(minutes: number) {
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+     return h > 0 ? `${h}h${m > 0 ? `${m}m` : ""}` : `${m}m`;
   }
 
   return (
@@ -105,7 +119,7 @@ export default function Streak() {
           <ul>
             {logs.slice(-5).map((log, i) => (
               <li key={i}>
-                {log.date} → {log.duration}min → {log.topic}
+                {log.date} → {formatDuration(log.duration)} → {log.topic} <button onClick={() => handleDelete(log.id)} >x</button>
               </li>
             ))}
           </ul>

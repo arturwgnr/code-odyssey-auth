@@ -307,6 +307,7 @@ body.light-theme {
   --btn-primary: #3a7562;
   --btn-primary-hover: #315d50;
   --btn-secondary: transparent;
+  --btn-secondary-hover: #4a867328;
   --btn-secondary-border: #3a7562;
   --btn-secondary-hover-bg: #3a7562;
   --btn-secondary-hover-text: #ffffff;
@@ -327,13 +328,15 @@ body.dark-theme {
   --text-box: #f8fafc;
   --text-secondary: #94a3b8;
 
-  --navbar-bg: #0f172acc;
+  --navbar-bg: #1c2438;
   --link-color: #c5d0d4;
 
   /* Botões */
   --btn-primary: #3c609b;
   --btn-primary-hover: #2563eb;
   --btn-secondary: transparent;
+  --btn-secondary-hover: #334057;
+
   --btn-secondary-border: #38bdf8;
   --btn-secondary-hover-bg: #38bdf8;
   --btn-secondary-hover-text: #0f172a;
@@ -345,7 +348,7 @@ body.dark-theme {
 /* Fundo texturizado light */
 body.light-theme {
   background-image: 
-    /* manchas verdes suaves */ radial-gradient(
+      /* manchas verdes suaves */ radial-gradient(
       circle at 20% 20%,
       rgba(124, 231, 138, 0.116) 0%,
       transparent 40%
@@ -1050,6 +1053,11 @@ body.light-theme {
 .skills-button {
   margin-right: 10px;
   margin-bottom: 15px;
+  transition: 0.3s ease;
+}
+
+.skills-button:hover {
+  opacity: 0.83;
 }
 
 .button-options {
@@ -1130,10 +1138,41 @@ body.light-theme {
 }
 
 /* Histórico */
+/* Scrollbar discreto para listas (Streak e Analytics) */
+.streak-log-preview ul,
 .analytics-log ul {
-  list-style: none;
-  padding: 0;
+  max-height: 220px; /* ou 200px no Analytics */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px; /* espaço pro scroll */
 }
+
+/* barra mais fina */
+.streak-log-preview ul::-webkit-scrollbar,
+.analytics-log ul::-webkit-scrollbar {
+  width: 4px; /* bem fininha */
+}
+
+/* "thumb" (a parte que desliza) */
+.streak-log-preview ul::-webkit-scrollbar-thumb,
+.analytics-log ul::-webkit-scrollbar-thumb {
+  background: rgba(90, 112, 101, 0.35); /* tom neutro/transparente */
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+/* fica mais visível só quando passa o mouse */
+.streak-log-preview ul:hover::-webkit-scrollbar-thumb,
+.analytics-log ul:hover::-webkit-scrollbar-thumb {
+  background: var(--btn-primary);
+}
+
+/* trilho */
+.streak-log-preview ul::-webkit-scrollbar-track,
+.analytics-log ul::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 .analytics-log li {
   padding: 0.6rem 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -1146,6 +1185,7 @@ body.light-theme {
 
 /* Botão voltar */
 .back-btn {
+  margin-bottom: 30px;
   padding: 0.8rem 1.6rem;
   border-radius: 10px;
   border: none;
@@ -1158,4 +1198,173 @@ body.light-theme {
 .back-btn:hover {
   background: var(--btn-primary-hover);
   transform: translateY(-2px);
+}
+
+/*streaks*/
+
+/* === Streak Form === */
+.streak-form {
+  margin: 2rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.streak-form input {
+  padding: 0.9rem 1.2rem;
+  border: 1px solid var(--btn-primary);
+  border-radius: 10px;
+  font-size: 1rem;
+  min-width: 180px;
+  background: var(--bg-input);
+  color: var(--text-box);
+  transition: border 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.streak-form input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+.streak-form input:focus {
+  border-color: var(--btn-primary);
+  box-shadow: 0 0 6px rgba(58, 117, 98, 0.3);
+  outline: none;
+  background: #ffffff10; /* efeito glass leve */
+}
+
+.streak-form .streak-btn {
+  padding: 0.9rem 1.6rem;
+  border: none;
+  border-radius: 10px;
+  background: var(--btn-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
+}
+
+.streak-form .streak-btn:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-2px);
+}
+
+/* === Recent Logs === */
+.streak-log-preview {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 14px;
+  background: var(--bg-box);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.streak-log-preview h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.streak-log-preview ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 0;
+}
+
+.streak-log-preview li {
+  background: var(--bg-input);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.streak-log-preview li:hover {
+  background: rgba(58, 117, 98, 0.12); /* leve verde musgo no hover */
+  transform: translateX(4px);
+}
+
+/* Recent Logs container */
+.streak-log-preview {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 14px;
+  background: var(--bg-box);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* Título */
+.streak-log-preview h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+/* Lista */
+.streak-log-preview ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 0;
+  max-height: 220px; /* altura limite (≈ 4–5 itens) */
+  overflow-y: auto; /* só scroll vertical */
+  overflow-x: hidden; /* bloqueia horizontal */
+}
+
+/* Estilizar a scrollbar */
+.streak-log-preview ul::-webkit-scrollbar {
+  width: 6px;
+}
+.streak-log-preview ul::-webkit-scrollbar-thumb {
+  background: var(--btn-primary);
+  border-radius: 6px;
+}
+.streak-log-preview ul::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Itens */
+.streak-log-preview li {
+  cursor: pointer;
+  background: var(--bg-input);
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.streak-log-preview li:hover {
+  background: var(--btn-secondary-hover);
+  transform: translateX(4px);
+}
+
+.streak-log-preview button {
+  background: var(--btn-primary);
+  border: none;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.streak-log-preview button:hover {
+  opacity: 0.85;
 }

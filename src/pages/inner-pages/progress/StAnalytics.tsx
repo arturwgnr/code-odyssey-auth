@@ -12,9 +12,29 @@ import {
   Cell,
   Legend,
 } from "recharts";
+import { useState, useEffect } from "react";
+
+interface StudyLog {
+  id: number;
+  date: string;
+  topic: string;
+  duration: number;
+}
 
 export default function StAnalytics() {
   const nav = useNavigate();
+
+  const [logs, setLogs] = useState<StudyLog[]>([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("studyLogs");
+
+    if (saved) {
+      setLogs(JSON.parse(saved));
+    }
+  }, []);
+
+  console.log(logs);
 
   // 📊 Dados mockados só para exemplo
   const dailyData = [
@@ -25,19 +45,51 @@ export default function StAnalytics() {
     { date: "05/09", hours: 1.5 },
   ];
 
-  const topicData = [
-    { name: "React", value: 8 },
-    { name: "TypeScript", value: 5 },
-    { name: "Projects", value: 6 },
+  const COLORS = [
+    "#3a7562", // verde musgo
+    "#f5b453", // amarelo
+    "#3b82f6", // azul
+    "#e57373", // vermelho suave
+    "#8e44ad", // roxo
+    "#16a085", // verde água
+    "#ff9800", // laranja
+    "#2ecc71", // verde vivo
+    "#9b59b6", // lilás
+    "#3498db", // azul claro
   ];
 
-  const COLORS = ["#3a7562", "#f5b453", "#3b82f6"];
+  function formatDuration(minutes: number) {
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    return h > 0 ? `${h}h${m > 0 ? `${m}m` : ""}` : `${m}m`;
+  }
+
+  function getTopicData(logs: StudyLog[]) {
+    const totals: Record<string, number> = {};
+
+    for (let log of logs) {
+      if (!totals[log.topic]) {
+        totals[log.topic] = 0;
+      }
+      totals[log.topic] += log.duration;
+    }
+
+    // transformar em array (pro PieChart)
+    return Object.entries(totals).map(([name, value]) => ({
+      name,
+      value,
+    }));
+  }
+
+  // já ordenado do maior pro menor
+  const topicData = getTopicData(logs).sort((a, b) => b.value - a.value);
 
   return (
     <div className="st-analytics-container">
       <TopBarDash />
       <h1>📊 Study Analytics</h1>
-      <p className="subtitle">Track your study time and focus</p>
+      <br />
+      <p className="subtitle">Track your study time and focus (Streak Page)</p>
 
       {/* Gráfico principal */}
       <section className="analytics-section">
@@ -73,7 +125,7 @@ export default function StAnalytics() {
         <ResponsiveContainer width="100%" height={250}>
           <PieChart>
             <Pie
-              data={topicData}
+              data={topicData} // agora vai o já ordenado
               dataKey="value"
               nameKey="name"
               outerRadius={80}
@@ -97,9 +149,11 @@ export default function StAnalytics() {
       <section className="analytics-log">
         <h2>History</h2>
         <ul>
-          <li>01/09 → 2h → React Router</li>
-          <li>02/09 → 1h → TypeScript</li>
-          <li>03/09 → 2h30 → Project To-Do</li>
+          {logs.map((item) => (
+            <li key={item.id}>
+              {item.date} → {formatDuration(item.duration)} → {item.topic}
+            </li>
+          ))}
         </ul>
       </section>
 
@@ -109,3 +163,5 @@ export default function StAnalytics() {
     </div>
   );
 }
+
+//remover index e atualizar streaks com delete e css
