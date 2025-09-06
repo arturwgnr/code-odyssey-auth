@@ -11,7 +11,7 @@ export default function RegisterPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [repeatedPassword, setRepeatedPassword] = useState('')
-  const [userRole, setUserRole] = useState<"admin" | "user">("user");
+ 
 
  function handleRegister(e: React.FormEvent) {
   e.preventDefault();
@@ -24,7 +24,7 @@ export default function RegisterPage() {
       return;
     }
 
-    auth?.register(username, password, userRole);
+    auth?.register(username, password, 'user');
 
     nav('/');
  
@@ -45,10 +45,6 @@ export default function RegisterPage() {
           <input value={username} onChange={(e) => setUsername(e.target.value)}  type="text" placeholder="Username" />
           <input value={password} onChange={(e) => setPassword(e.target.value)}    type="password" placeholder="Password" />
           <input value={repeatedPassword} onChange={(e) => setRepeatedPassword(e.target.value)} type="password" placeholder="Repeat Password" />
-          <select value={userRole} onChange={(e) => setUserRole(e.target.value as "admin" | "user") } >
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-          </select>
           <button onClick={handleRegister} type="submit">Register</button>
         </form>
         <p>

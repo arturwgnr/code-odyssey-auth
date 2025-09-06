@@ -9,6 +9,8 @@ import Progress from "./pages/inner-pages/Progress";
 import Streak from "./pages/inner-pages/Streak";
 import SkOverview from "./pages/inner-pages/progress/SkOverview";
 import StAnalytics from "./pages/inner-pages/progress/StAnalytics";
+import ProjectProgress from "./pages/inner-pages/progress/ProjectProgress";
+
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path="/progress/skills-overview" element={<SkOverview/>} />
 
         <Route path="/progress/study-analytics" element={<StAnalytics/>} />
+
+        <Route path="/progress/projects-progress" element={<ProjectProgress/>}  />
       </Routes>
     </Router>
 </AuthProvider>

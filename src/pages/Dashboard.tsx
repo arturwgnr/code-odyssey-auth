@@ -1,5 +1,5 @@
 import TopBarDash from "../components/TopBarDash";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +11,29 @@ export default function Dashboard() {
 
   function handleNav(path: string) {
     nav(`/dashboard/${path}`);
+  }
+
+  const [currentTipIndex, setCurrentTipIndex] = useState(0);
+
+  const tips = [
+  { text: "Remember: Consistency beats intensity. Keep coding daily." },
+  { text: "Remember: Small steps compound into big progress." },
+  { text: "Remember: Show up, even when motivation fades." },
+  { text: "Remember: Patience is the hidden engine of growth." },
+  { text: "Remember: Every bug fixed is a lesson learned." },
+  { text: "Remember: Progress is built one line of code at a time." },
+  { text: "Remember: Habits will carry you further than inspiration." },
+  { text: "Remember: The grind today is the glory tomorrow." },
+  { text: "Remember: Focus on learning, success will follow." },
+  { text: "Remember: Coding is a marathon, not a sprint." },
+  { text: "Remember: Growth comes from discomfort—don’t avoid it." },
+  { text: "Remember: Sharpen your skills daily, like a blade." },
+  { text: "Remember: Curiosity keeps the journey alive." },
+  { text: "Remember: Discipline is the ultimate programming skill." },
+  { text: "Remember: Win the day, then repeat tomorrow." }];
+
+  function handleChangeTip() {
+    setCurrentTipIndex((prev) => (prev + 1) % tips.length)
   }
 
   return (
@@ -54,10 +77,10 @@ export default function Dashboard() {
         </div>
 
         {/* Big card below grid */}
-        <div className="dashboard-carousel">
+        <div onClick={handleChangeTip} className="dashboard-carousel">
           <div className="carousel-card">
             <h2>💡 Tip of the Day</h2>
-            <p>Remember: Consistency beats intensity. Keep coding daily.</p>
+            <p>{tips[currentTipIndex].text}</p>
           </div>
         </div>
       </div>

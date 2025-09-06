@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import TopBarDash from "../../components/TopBarDash"
 import { useNavigate } from "react-router-dom"
+import { AuthContext } from "../../context/AuthContext"
 
 interface Skill {
   name: string
@@ -8,18 +9,18 @@ interface Skill {
 }
 
 export default function Progress() {
+  const auth = useContext(AuthContext)
+  const userId = auth?.user?.id || "guest"
 
-  const nav = useNavigate();
+  const nav = useNavigate()
 
   function handleNav(id: string) {
+    nav(`/progress/${id}`)
+  }
 
-    const format = '/progress/'
-
-    nav(`${format + id}`)
-  } 
-
+  // 🔹 Skills específicas por usuário
   const [skills, setSkills] = useState<Skill[]>(() => {
-    const saved = localStorage.getItem("skills")
+    const saved = localStorage.getItem(`${userId}-skills`)
     return saved ? JSON.parse(saved) : []
   })
 
@@ -29,9 +30,10 @@ export default function Progress() {
   const [editingIndex, setEditingIndex] = useState<number | null>(null)
   const [editLevel, setEditLevel] = useState("")
 
+  // salvar skills no localStorage por usuário
   useEffect(() => {
-    localStorage.setItem("skills", JSON.stringify(skills))
-  }, [skills])
+    localStorage.setItem(`${userId}-skills`, JSON.stringify(skills))
+  }, [skills, userId])
 
   // Add skill
   function handleAddSkill(e: React.FormEvent) {
@@ -67,25 +69,41 @@ export default function Progress() {
     <div className="progress-container">
       <TopBarDash />
       <h1>📊 Progress</h1>
-      <p className="subtitle">Topics studied and evolution</p> 
-      
-      <div className="button-options">
-      <button className="skills-button" id="skills-overview" onClick={() => handleNav("skills-overview")} >Skills Overview</button><br />
-      <button className="skills-button"  onClick={() => handleNav("study-analytics")} >Study Analytics</button><br />
-       <button className="skills-button">Projects Progress</button>
-      </div>
+      <p className="subtitle">Topics studied and evolution</p>
 
-      
+      {/* Navigation buttons */}
+      <div className="button-options">
+        <button
+          className="skills-button"
+          id="skills-overview"
+          onClick={() => handleNav("skills-overview")}
+        >
+          Skills Overview
+        </button>
+        <br />
+        <button
+          className="skills-button"
+          onClick={() => handleNav("study-analytics")}
+        >
+          Study Analytics
+        </button>
+        <br />
+        <button onClick={() => handleNav("projects-progress")} className="skills-button">Projects Progress</button>
+      </div>
 
       {/* Skills Section */}
       <section className="progress-skills">
-        <h2>Skills Progress</h2><br />
+        <h2>Skills Progress</h2>
+        <br />
 
         {skills.map((s, i) => (
           <div key={i} className="skill">
             <span>{s.name}</span>
             <div className="progress-bar">
-              <div className="progress-fill" style={{ width: `${s.level}%` }}></div>
+              <div
+                className="progress-fill"
+                style={{ width: `${s.level}%` }}
+              ></div>
             </div>
 
             {editingIndex === i ? (
@@ -101,12 +119,17 @@ export default function Progress() {
               <span className="percent">{s.level}%</span>
             )}
 
-            <button onClick={() => handleStartEdit(i)}>✏️</button>
-            <button onClick={() => handleDeleteSkill(i)}>❌</button>
+            <button onClick={() => handleStartEdit(i)}>Edit</button>
+            <button 
+          onClick={() => handleDeleteSkill(i)} 
+          className="delete-btn"
+           >
+        X
+      </button>
           </div>
         ))}
 
-        {/* Formulário */}
+        {/* Add new skill form */}
         <form onSubmit={handleAddSkill} className="skill-form">
           <input
             type="text"

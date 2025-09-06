@@ -337,8 +337,8 @@ body.dark-theme {
   --btn-secondary: transparent;
   --btn-secondary-hover: #334057;
 
-  --btn-secondary-border: #38bdf8;
-  --btn-secondary-hover-bg: #38bdf8;
+  --btn-secondary-border: #5b88cf;
+  --btn-secondary-hover-bg: #5a90e6;
   --btn-secondary-hover-text: #0f172a;
 
   /* Acentos */
@@ -1367,4 +1367,96 @@ body.light-theme {
 
 .streak-log-preview button:hover {
   opacity: 0.85;
+}
+
+/* Container geral */
+.projects-container {
+  padding-top: 6rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Formulário */
+.project-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.project-form input {
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: var(--bg-input);
+  color: var(--text-box);
+  font-size: 1rem;
+}
+
+.project-form button {
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  border: none;
+  background: var(--btn-primary, #2a5298);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.project-form button:hover {
+  background: #1e3c72;
+  transform: translateY(-2px);
+}
+
+/* Grid de cards */
+.project-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Card individual */
+.project-card {
+  background: var(--bg-box);
+  color: var(--text-box);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.project-card h3 {
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.project-card p {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+/* Barra de progresso */
+.progress-bar {
+  background: #ddd;
+  border-radius: 10px;
+  height: 10px;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: var(--btn-primary, #2a5298);
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.4s ease-in-out;
 }

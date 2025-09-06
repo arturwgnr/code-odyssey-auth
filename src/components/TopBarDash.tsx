@@ -13,9 +13,12 @@ export default function TopBarDash() {
   }
 
   function handleLogout() {
+    const confirmLogout = window.confirm("Are you sure you want to logout?");
+    if (confirmLogout) {
     auth?.logout();
     nav("/login");
   }
+}
 
   const username = auth?.user?.username ?? "Guest";
 
