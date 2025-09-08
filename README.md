@@ -70,4 +70,4 @@ npm run dev
 
  Persist theme selection in localStorage
 
-Next features coming in the future!
+Next features coming in the future! Near future.
